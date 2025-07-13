@@ -1,6 +1,7 @@
+from http.client import HTTPException
 from typing import Optional
 from fastapi import FastAPI, Query
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 import json
 
 app = FastAPI()
@@ -12,7 +13,7 @@ def hello():
 
 
 @app.get("/time")
-def get_server_time(name: Optional[str] = None, country: Optional[str] = None):
+def get_server_time(name: Optional[str] = None, country: Optional[str] = None) -> dict:
     format: str = "%d/%m/%y %H:%M:%S"
 
     info: str = None
@@ -35,3 +36,18 @@ def get_server_time(name: Optional[str] = None, country: Optional[str] = None):
             "local": datetime.now().strftime(format),
             "utc": datetime.now(timezone.utc).strftime(format),
         }
+
+
+@app.get("/time/offset/{offset}")
+def get_server_time_with_offset(offset: float) -> dict:
+    if offset < -12 or offset > 14:
+        # bad request
+        raise HTTPException(status_code=400, detail="Invalid time offset")
+
+    format: str = "%d/%m/%y %H:%M:%S"
+    utc_time: datetime = datetime.now(timezone.utc)
+
+    return {
+        "utc": utc_time.strftime(format),
+        "offset_time": (utc_time + timedelta(hours=offset)).strftime(format),
+    }

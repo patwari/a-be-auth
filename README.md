@@ -52,10 +52,11 @@ This file is for me to learn. Will be too boring. Avoid it at all cost.
 8. Catch Query Parameters
 
    ```py
+   @app.get("/time")
    def get_server_time(name: Optional[str] = None, country: Optional[str] = None):
    ```
 
-   - Add params in requests
+   - Add params in the GET requests
 
    ```bash
    curl http://127.0.0.1:8000/time
@@ -66,4 +67,27 @@ This file is for me to learn. Will be too boring. Avoid it at all cost.
 
    curl http://127.0.0.1:8000/time?country=india&name=rahul
    # {"message":"Hello Rahul from India","local":"13/07/25 19:14:15","utc":"13/07/25 13:44:15"}
+   ```
+
+9. Catch Path Parameters
+
+   ```py
+   @app.get("/time/offset/{offset}")
+   def get_server_time_with_offset(offset: float):
+   ```
+
+   - Add params in the GET request
+
+   ```bash
+   curl 127.0.0.1:8000/time/offset/0
+   # {"utc":"13/07/25 18:42:56","offset_time":"13/07/25 18:42:56"}
+
+   curl 127.0.0.1:8000/time/offset/0.5
+   # {"utc":"13/07/25 18:42:33","offset_time":"13/07/25 19:12:33"}
+
+   curl 127.0.0.1:8000/time/offset/+5.5
+   # {"utc":"13/07/25 18:43:16","offset_time":"14/07/25 00:13:16"}
+
+   curl 127.0.0.1:8000/time/offset/5.5
+   # {"utc":"13/07/25 18:43:18","offset_time":"14/07/25 00:13:18"}
    ```
