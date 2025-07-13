@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.env
+.venv
+venv/
+ENV/
+.envrc
+
+# VSCode
+.vscode/
+
+# MacOS
+.DS_Store
+
+# Output directory
+out/
+
+# TypeScript compilation output
+frontend/static/js/
+*.js.map
+
+# Logs
+*.log
+
+# Docker
+*.pid
+docker-compose.override.yml
