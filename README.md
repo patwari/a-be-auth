@@ -43,3 +43,7 @@ This file is for me to learn. Will be too boring. Avoid it at all cost.
     def get_server_local_time():
         return datetime.now()
    ```
+
+7. Explore Swagger UI and ReDoc (auto-generated docs)
+   - http://127.0.0.1:8000/docs — Swagger UI
+   - http://127.0.0.1:8000/redoc — ReDoc

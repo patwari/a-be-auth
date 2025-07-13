@@ -1,6 +1,6 @@
-from fastapi import FastAPI
-
-from datetime import datetime
+from fastapi import FastAPI  # type: ignore
+from datetime import datetime, timezone
+import json
 
 app = FastAPI()
 
@@ -11,5 +11,9 @@ def hello():
 
 
 @app.get("/time")
-def get_server_local_time():
-    return datetime.now()
+def get_server_utc_time():
+    format: str = "%d/%m/%y %H:%M:%S"
+    return {
+        "local": datetime.now().strftime(format),
+        "utc": datetime.now(timezone.utc).strftime(format),
+    }
