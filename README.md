@@ -45,5 +45,25 @@ This file is for me to learn. Will be too boring. Avoid it at all cost.
    ```
 
 7. Explore Swagger UI and ReDoc (auto-generated docs)
+
    - http://127.0.0.1:8000/docs — Swagger UI
    - http://127.0.0.1:8000/redoc — ReDoc
+
+8. Catch Query Parameters
+
+   ```py
+   def get_server_time(name: Optional[str] = None, country: Optional[str] = None):
+   ```
+
+   - Add params in requests
+
+   ```bash
+   curl http://127.0.0.1:8000/time
+   # {"local":"13/07/25 19:13:12","utc":"13/07/25 13:43:12"}
+
+   curl http://127.0.0.1:8000/time?name=rahul
+   # {"message":"Hello Rahul","local":"13/07/25 19:13:58","utc":"13/07/25 13:43:58"}%
+
+   curl http://127.0.0.1:8000/time?country=india&name=rahul
+   # {"message":"Hello Rahul from India","local":"13/07/25 19:14:15","utc":"13/07/25 13:44:15"}
+   ```
