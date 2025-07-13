@@ -2,7 +2,7 @@ from http.client import HTTPException
 from typing import Optional
 from fastapi import FastAPI, Query
 from datetime import datetime, timedelta, timezone
-import json
+from pydantic import BaseModel
 
 app = FastAPI()
 
@@ -50,4 +50,20 @@ def get_server_time_with_offset(offset: float) -> dict:
     return {
         "utc": utc_time.strftime(format),
         "offset_time": (utc_time + timedelta(hours=offset)).strftime(format),
+    }
+
+
+# Request Body Schema
+class User(BaseModel):
+    name: str
+    country: str
+
+
+@app.post("/time")
+def get_server_time(user: User) -> dict:
+    format: str = "%d-%m-%y %H:%M:%S"
+    return {
+        "message": f"hello {user.name.title()} from {user.country.title()}",
+        "local": datetime.now().strftime(format),
+        "utc": datetime.now(timezone.utc).strftime(format),
     }

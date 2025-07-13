@@ -91,3 +91,12 @@ This file is for me to learn. Will be too boring. Avoid it at all cost.
    curl 127.0.0.1:8000/time/offset/5.5
    # {"utc":"13/07/25 18:43:18","offset_time":"14/07/25 00:13:18"}
    ```
+
+10. Setup a POST request:
+
+- Add body in post request
+
+  ```bash
+  curl 127.0.0.1:8000/time --request POST --header 'Content-Type: application/json' --data '{ "name": "rahul", "country": "india" }'
+  # {"message":"hello Rahul from India","local":"14-07-25 00:51:13","utc":"13-07-25 19:21:13"}%
+  ```

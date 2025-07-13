@@ -1,2 +1,7 @@
 fastapi
+
+# for hosting the server. `uvicorn main:app --reload`
 uvicorn
+
+# this is only to see the pip dependency tree.
+pipdeptree  
